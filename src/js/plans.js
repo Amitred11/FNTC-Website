@@ -18,20 +18,24 @@ function createPlanCardElement(plan, index) {
     card.style.position = 'absolute';
     card.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
 
-    const defaultColorClass = 'border-2 border-[#56DEFC] ring-4 ring-[#56DEFC]/40';
+    const defaultThemeClass = 'border-2 border-[#56DEFC] ring-4 ring-[#56DEFC]/40 bg-[#E6FAFF] text-[#036B8A]';
     const defaultIconSvg = `<svg class="w-10 h-10 mb-2 text-gray-300 animate-bounce" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><circle cx="12" cy="12" r="5"/></svg>`;
 
     const cardInner = document.createElement('div');
-    cardInner.className = `card-inner bg-gradient-to-b from-[#1a3139] to-[#0ea9bf] ${plan.color || defaultColorClass} rounded-2xl shadow-xl p-8 flex flex-col items-center justify-center transition-all duration-300`;
+    cardInner.className = 'card-inner rounded-2xl shadow-xl p-8 flex flex-col items-center justify-center transition-all duration-300';
+    
+    const themeClasses = plan.color || defaultThemeClass;
+    cardInner.classList.add(...themeClasses.split(' ').filter(Boolean));
+
     cardInner.style.minWidth = '260px';
     cardInner.style.maxWidth = '320px';
     cardInner.style.minHeight = '370px';
 
     cardInner.innerHTML = `
         ${plan.iconSvg || defaultIconSvg}
-        <span class="text-white/80 font-semibold mb-2">${plan.name}</span>
-        <div class="text-3xl md:text-4xl font-bold mb-2 text-white">₱${plan.price} <span class="text-lg font-normal">/ Month</span></div>
-        <ul class="text-white/90 space-y-2 mb-6 text-center">${plan.features.map(d => `<li>✔ ${d}</li>`).join('')}</ul>
+        <span class="font-semibold mb-2">${plan.name}</span> 
+        <div class="text-3xl md:text-4xl font-bold mb-2">₱${plan.price} <span class="text-lg font-normal">/ Month</span></div>
+        <ul class="space-y-2 mb-6 text-center">${plan.features.map(d => `<li>✔ ${d}</li>`).join('')}</ul>
     `;
     
     const applyButton = document.createElement('button');
@@ -42,8 +46,12 @@ function createPlanCardElement(plan, index) {
     });
     
     const noteParagraph = document.createElement('p');
-    noteParagraph.className = 'plan-note text-white/80 text-sm mt-4 text-center transition-opacity duration-300';
+    noteParagraph.className = 'plan-note text-sm mt-4 text-center transition-opacity duration-300';
     noteParagraph.textContent = plan.note || '';
+
+    cardInner.querySelectorAll('span, div, ul, p').forEach(el => {
+        el.classList.add('text-white');
+    });
     
     cardInner.appendChild(applyButton);
     cardInner.appendChild(noteParagraph);
