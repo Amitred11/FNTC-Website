@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     populateAboutModal();
 
     setupPlanCarousel();
+    setupVideoModal();
 });
 
 
@@ -244,25 +245,96 @@ contactForm.addEventListener("submit", async (e) => {
   }
 });
 
-const stopStyle = [
-  'font-size: 50px',
-  'font-weight: bold',
-  'color: red',
-  'padding: 10px 0'
-].join(';');
+// ==================================================================
+// 8. Video Modal Logic (FINAL REFACTOR v4 - With Info Modal)
+// ==================================================================
+function setupVideoModal() {
+    // --- Element Selection ---
+    const openModalBtn = document.getElementById('open-video-modal-btn');
+    const closeModalBtn = document.getElementById('close-video-modal-btn');
+    const videoModal = document.getElementById('video-modal');
+    const videoContainer = document.getElementById('video-container');
+    const videoPlayer = document.getElementById('local-video-player');
+    const customControlsBar = document.getElementById('custom-controls-bar');
+    const infoBtn = document.getElementById('video-info-btn');
+    const videoInfoModal = document.getElementById('video-info-modal');
+    const closeInfoModalBtn = document.getElementById('close-video-info-modal-btn');
 
-const messageStyle = [
-  'font-size: 18px',
-  'line-height: 1.5'
-].join(';');
+    if (!openModalBtn || !videoModal || !videoPlayer || !customControlsBar || !videoInfoModal) {
+        console.error("Video modal elements are missing."); return;
+    }
 
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const progressBarContainer = document.getElementById('progress-bar-container');
+    const progressBar = document.getElementById('progress-bar');
+    const timeDisplay = document.getElementById('time-display');
+    const volumeBtn = document.getElementById('volume-btn');
+    const volumeHighIcon = document.getElementById('volume-high-icon');
+    const volumeMutedIcon = document.getElementById('volume-muted-icon');
+    const volumeSlider = document.getElementById('volume-slider');
+    const speedBtn = document.getElementById('speed-btn');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+    let controlsTimeout;
+
+    // --- Core Functions ---
+    const showControls = () => { customControlsBar.classList.add('controls-visible'); clearTimeout(controlsTimeout); if (!videoPlayer.paused) { controlsTimeout = setTimeout(hideControls, 3000); } };
+    const hideControls = () => { customControlsBar.classList.remove('controls-visible'); };
+    const togglePlay = () => { videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause(); };
+    const updatePlayPauseIcon = () => { playIcon.style.display = videoPlayer.paused ? 'block' : 'none'; pauseIcon.style.display = videoPlayer.paused ? 'none' : 'block'; };
+    const formatTime = (seconds) => { const m = Math.floor(seconds / 60), s = Math.floor(seconds % 60); return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`; };
+    const updateProgress = () => { if (!isNaN(videoPlayer.duration)) { const p = (videoPlayer.currentTime / videoPlayer.duration) * 100; progressBar.style.width = `${p}%`; timeDisplay.textContent = `${formatTime(videoPlayer.currentTime)} / ${formatTime(videoPlayer.duration)}`; } };
+    const seek = (e) => { const r = progressBarContainer.getBoundingClientRect(); videoPlayer.currentTime = ((e.clientX - r.left) / r.width) * videoPlayer.duration; };
+    const toggleFullscreen = () => { if (!document.fullscreenElement) { videoContainer.requestFullscreen().catch(err => console.error(err)); } else { document.exitFullscreen(); } };
+
+    const openModal = () => { videoModal.classList.add('active'); videoPlayer.play(); };
+    const closeModal = () => { videoPlayer.pause(); videoModal.classList.remove('active'); setTimeout(() => { videoPlayer.currentTime = 0; }, 300); };
+    
+    const openInfoModal = () => { videoInfoModal.classList.add('active'); };
+    const closeInfoModal = () => { videoInfoModal.classList.remove('active'); };
+
+    // --- Event Listeners ---
+    openModalBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    videoModal.addEventListener('click', (e) => { if (e.target === videoModal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === "Escape" && videoModal.classList.contains('active')) closeModal(); });
+    
+    // Info Modal Listeners
+    infoBtn.addEventListener('click', openInfoModal);
+    videoInfoModal.addEventListener('click', (e) => { if (e.target === videoInfoModal) closeInfoModal(); });
+
+    // Player UI Listeners
+    videoContainer.addEventListener('mousemove', showControls);
+    videoContainer.addEventListener('mouseleave', hideControls);
+    videoPlayer.addEventListener('play', () => { updatePlayPauseIcon(); controlsTimeout = setTimeout(hideControls, 3000); });
+    videoPlayer.addEventListener('pause', () => { updatePlayPauseIcon(); showControls(); });
+    videoPlayer.addEventListener('timeupdate', updateProgress);
+    videoPlayer.addEventListener('loadedmetadata', updateProgress);
+    playPauseBtn.addEventListener('click', togglePlay);
+    progressBarContainer.addEventListener('click', seek);
+
+    volumeBtn.addEventListener('click', () => { videoPlayer.muted = !videoPlayer.muted; });
+    videoPlayer.addEventListener('volumechange', () => { const isMuted = videoPlayer.muted || videoPlayer.volume === 0; volumeHighIcon.style.display = isMuted ? 'none' : 'block'; volumeMutedIcon.style.display = isMuted ? 'block' : 'none'; volumeSlider.value = isMuted ? 0 : videoPlayer.volume; });
+    volumeSlider.addEventListener('input', (e) => { videoPlayer.muted = false; videoPlayer.volume = e.target.value; });
+
+    speedBtn.addEventListener('click', () => { const s = [1, 1.5, 2, 0.5], c = videoPlayer.playbackRate, n = (s.indexOf(c) + 1) % s.length; videoPlayer.playbackRate = s[n]; speedBtn.textContent = `${s[n]}x`; });
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    
+    // Initial UI setup
+    updatePlayPauseIcon();
+    updateProgress();
+}
+
+// ==================================================================
+// 9. Developer Console Warning
+// ==================================================================
+const stopStyle = ['font-size: 50px', 'font-weight: bold', 'color: red', 'padding: 10px 0'].join(';');
+const messageStyle = ['font-size: 18px', 'line-height: 1.5'].join(';');
 
 console.log('%cStop!', stopStyle);
-
-console.warn(
-  '%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to get free internet, increase your speed, or "hack" into our system, it is a scam. Doing so will give them access to your FiBear Network account and personal information.',
-  messageStyle
-);
+console.warn('%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to "hack" into our system, it is a scam and will give them access to your account.', messageStyle);
 console.log(
   '%cIf you have any questions or need support, please visit our official facebook: https://www.facebook.com/fntc.kasiglahanvillage2023 or contact our customer service directly. Never share your account details or paste code given to you by an untrusted source.',
   messageStyle

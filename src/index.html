@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/output.css">
+  <link rel="stylesheet" href="css/index.css">
+
 
 </head>
 <body class="bg-[#121418] text-white" style="background: url('assets/background/bg.gif') center center / cover no-repeat fixed;">
@@ -91,6 +93,7 @@
     <p class="max-w-2xl text-gray-300 font-inter text-lg mb-8" data-aos="fade-up" data-aos-delay="200">Enjoy seamless connectivity with our fast, budget-friendly broadband services for home and business.</p>
     <div data-aos="zoom-in" data-aos-delay="400">
       <a href="login.html" class="bg-[#0EA9BF] hover:bg-[#0c8ca0] text-white font-bold px-6 py-3 rounded-full shadow-lg transition">Client Login</a>
+      <button id="open-video-modal-btn" class="ml-4 border-2 border-[#0EA9BF] text-[#0EA9BF] hover:bg-[#0EA9BF] hover:text-white font-bold px-6 py-3 rounded-full shadow-lg transition duration-300">▶ Watch Video</button>
     </div>
   </section>
   
@@ -155,9 +158,6 @@
     </div>
 </section>
 
-  <!-- ================================================================== -->
-  <!-- 7. CONTACT US SECTION -->
-  <!-- ================================================================== -->
   <section id="contactus" class="bg-gradient-to-b from-black to-[#002534] py-20 px-6 lg:px-13 overflow-hidden">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-start" data-aos="fade-up">
         <div data-aos="fade-up" data-aos-delay="100">
@@ -168,6 +168,9 @@
                 <p class="flex items-center gap-3"><span>📞</span> 09707541724 | 09071049526 | 09154283220 </p>
                 <p class="flex items-center gap-3"><span>✉️</span> fntc.kasiglahanvillage@gmail.com</p>
                 <p class="flex items-center gap-3"><span>📍</span> Kasiglahan Village, Rodriguez, Rizal</p>
+            </div>
+            <div class="mt-8">
+                <iframe id="map" src="https://www.google.com/maps?q=14.7397636,121.1401032&output=embed" class="w-full h-96 rounded-2xl" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
         <div data-aos="fade-up" data-aos-delay="200">
@@ -185,9 +188,6 @@
     </div>
   </section>
 
-  <!-- ================================================================== -->
-  <!-- 8. FOOTER -->
-  <!-- ================================================================== -->
   <footer class="bg-[#014C6A] py-10 px-6">
     <div class="max-w-7xl mx-auto px-2 md:flex justify-between items-start space-y-10 md:space-y-0">
         <div>
@@ -215,9 +215,6 @@
   <p>Created by <a href="https://github.com/dy2zz"><span class="text-white font-semibold">dy2zz</span></a> and <a href="https://github.com/Amitred11"><span class="text-white font-semibold">Amitred11</span></a></p>
 </div>
   
-  <!-- ================================================================== -->
-  <!-- ALL MODALS GO HERE -->
-  <!-- ================================================================== -->
  <div id="serviceModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] hidden">
     <div id="serviceModalBox" class="font-inter bg-[#1A3139] text-white rounded-2xl shadow-2xl max-w-md w-full relative transform scale-90 opacity-0 transition-all duration-300 overflow-hidden">
         <button id="closeServiceModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-10">&times;</button>
@@ -235,7 +232,55 @@
     </div>
   </div>
 
+  <div id="video-modal">
+    <div id="video-modal-content">
+      <div class="flex justify-between items-center p-4 border-b border-gray-700">
+        <h3 class="text-xl font-semibold text-white">Promotional Video</h3>
+        <button id="close-video-modal-btn" class="text-gray-400 hover:text-white transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
 
+      <div id="video-container">
+        <video id="local-video-player" src="assets/video/video.mp4" muted playsinline></video>
+        <button id="video-info-btn">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+        </button>
+        <div id="custom-controls-bar">
+          <div id="progress-bar-container"><div id="progress-bar"></div></div>
+          <div class="button-controls-row">
+            <div class="controls-group">
+              <button id="play-pause-btn">
+                <svg id="play-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                <svg id="pause-icon" class="w-6 h-6" style="display: none;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+              </button>
+              <div id="volume-control-container">
+                <button id="volume-btn">
+                  <svg id="volume-high-icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"></path></svg>
+                  <svg id="volume-muted-icon" style="display: none;" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M5.586 15H4a1 1 0 01-1-1V8a1 1 0 011-1h1.586l4.707-4.707C10.683 1.902 11 2.146 11 2.707v14.586c0 .56-.317.805-.707.414L5.586 15z" clip-rule="evenodd" fill-rule="evenodd"></path><path d="M13.707 14.293a1 1 0 010-1.414L15.586 11l-1.879-1.879a1 1 0 111.414-1.414L17 9.586l1.879-1.879a1 1 0 111.414 1.414L18.414 11l1.879 1.879a1 1 0 01-1.414 1.414L17 12.414l-1.879 1.879a1 1 0 01-1.414 0z"></path></svg>
+                </button>
+                <input id="volume-slider" type="range" min="0" max="1" step="0.1" value="1">
+              </div>
+              <span id="time-display" class="text-sm font-mono text-white">00:00 / 00:00</span>
+            </div>
+            <div class="controls-group">
+              <button id="speed-btn" class="text-sm font-bold w-12 text-center text-white">1x</button>
+              <button id="fullscreen-btn">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 0h-4m4 0l-5-5"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="video-info-modal">
+    <div id="video-info-modal-box">
+      <h3 class="text-xl font-bold mb-2 text-[#56DEFC]">Video Information</h3>
+      <p class="text-gray-300">Promotional Video © Fibear Network Technologies Corp.</p>
+    </div>
+  </div>
 
   <!-- SCRIPTS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
