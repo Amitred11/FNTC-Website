@@ -1,0 +1,107 @@
+#loading-screen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #121418;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Controls the final fade-out of the whole screen */
+  transition: opacity 0.75s ease-in-out;
+  opacity: 0; /* Start as transparent, JS will handle this */
+  animation: fadeInScreen 0.5s forwards;
+}
+
+/* A container to keep all loader elements grouped */
+.loader-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The central logo styling */
+.loader-logo {
+  width: 90px; /* Adjust size as needed */
+  height: auto;
+  z-index: 10;
+  /* A modern glow effect using drop-shadow */
+  filter: drop-shadow(0 0 15px rgba(14, 169, 191, 0.6));
+  animation: pulseLogo 2.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Base styles for both rings */
+.ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+/* Ring 1: Inner, solid, faster rotation */
+#ring-1 {
+  border: 2px solid transparent;
+  border-top-color: #56DEFC; /* Light Cyan */
+  animation: spin-clockwise 2s linear infinite;
+  filter: drop-shadow(0 0 10px #56DEFC);
+}
+
+/* Ring 2: Outer, dashed, slower counter-rotation */
+#ring-2 {
+  width: 140%; /* Make it larger */
+  height: 140%;
+  top: -20%; /* Re-center it */
+  left: -20%;
+  border: 3px dashed #0EA9BF; /* Main Brand Cyan */
+  animation: spin-counter-clockwise 4s linear infinite;
+}
+
+
+/* KEYFRAME ANIMATIONS */
+
+/* Fade in the entire screen on load */
+@keyframes fadeInScreen {
+  to {
+    opacity: 1;
+  }
+}
+
+/* A subtle pulse for the logo */
+@keyframes pulseLogo {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+/* Clockwise rotation for the inner ring */
+@keyframes spin-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Counter-clockwise rotation for the outer ring */
+@keyframes spin-counter-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
