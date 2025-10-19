@@ -1,20 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Fetch the loader HTML and inject it into the body
-  fetch('loader.html')
-    .then(response => response.text())
-    .then(data => {
-      document.body.insertAdjacentHTML('afterbegin', data);
-      
-      // Now that the loader is in the DOM, add the event listener for when the page is fully loaded
-      window.addEventListener('load', () => {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-          loadingScreen.style.opacity = '0';
-          setTimeout(() => {
-            loadingScreen.style.display = 'none';
-          }, 500); // Matches the transition duration
-        }
+  if (sessionStorage.getItem('loaderShown')) {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+      loadingScreen.style.display = 'none';
+    }
+    return;
+  }
+
+  const particlesContainer = document.querySelector('.particles-container');
+  if (particlesContainer) {
+    const PARTICLE_COUNT = 30;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+
+      const angle = Math.random() * 360;
+      const duration = 2 + Math.random() * 3;
+      const delay = Math.random() * 4;
+
+      particle.animate([
+        { transform: 'translate(-50%, -50%) rotate(0deg) translateX(0px) scale(1)', opacity: 1 },
+        { transform: `translate(-50%, -50%) rotate(${angle}deg) translateX(200px) scale(0)`, opacity: 0 }
+      ], {
+        duration: duration * 1000,
+        delay: delay * 1000,
+        iterations: Infinity,
+        easing: 'ease-out'
       });
-    })
-    .catch(error => console.error('Error loading the loader:', error));
+      
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  const MINIMUM_LOAD_TIME = 1500;
+  const loadingScreen = document.getElementById('loading-screen');
+  
+  if (!loadingScreen) {
+    console.error('[Loader] Error: Could not find the #loading-screen element.');
+    return;
+  }
+
+  let minimumTimeElapsed = false;
+  let pageIsLoaded = false;
+
+  const hideLoader = () => {
+    loadingScreen.style.opacity = '0';
+    loadingScreen.addEventListener('transitionend', () => {
+      loadingScreen.style.display = 'none';
+
+      try {
+        sessionStorage.setItem('loaderShown', 'true');
+      } catch (e) {
+        console.error('[Loader] Could not set sessionStorage. Loader may show on every page.', e);
+      }
+
+    }, { once: true });
+  };
+
+  setTimeout(() => {
+    minimumTimeElapsed = true;
+    if (pageIsLoaded) {
+      hideLoader();
+    }
+  }, MINIMUM_LOAD_TIME);
+
+  window.addEventListener('load', () => {
+    pageIsLoaded = true;
+    if (minimumTimeElapsed) {
+      hideLoader();
+    }
+  });
 });

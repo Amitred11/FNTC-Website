@@ -10,10 +10,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/output.css">
   <link rel="stylesheet" href="css/index.css">
-
+  <link rel="stylesheet" href="css/loader.css"> 
 
 </head>
 <body class="bg-[#121418] text-white" style="background: url('assets/background/bg.gif') center center / cover no-repeat fixed;">
+
+  <div id="loading-screen">
+  <div class="loader-container">
+      <div class="particles-container"></div>
+    <img src="./assets/icons/logo.png" alt="Loading..." class="loader-logo"/>
+    
+    <div class="ring" id="ring-1"></div>
+    <div class="ring" id="ring-2"></div>
+    <div class="ring" id="ring-3"></div>
+
+    <div class="loading-text">Initializing...</div>
+  </div>
+</div>
 
   <!-- ================================================================== -->
   <!-- 1. HEADER & NAVIGATION -->
@@ -284,6 +297,7 @@
 
   <!-- SCRIPTS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/loader.js"></script> 
   <script src="js/transitions.js" defer></script> 
   <script type="module" src="js/index.js"></script>
 </body>

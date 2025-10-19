@@ -6,8 +6,23 @@
   <title>Fibear Client Portal</title>
   <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
   <link rel="stylesheet" href="css/output.css">
+  <link rel="stylesheet" href="css/loader.css">
+
 </head>
 <body class="bg-gradient-to-b from-[#121418] to-[#014C6A] flex items-center justify-center min-h-screen relative">
+  
+  <div id="loading-screen">
+  <div class="loader-container">
+      <div class="particles-container"></div>
+    <img src="./assets/icons/logo.png" alt="Loading..." class="loader-logo"/>
+    
+    <div class="ring" id="ring-1"></div>
+    <div class="ring" id="ring-2"></div>
+    <div class="ring" id="ring-3"></div>
+
+    <div class="loading-text">Initializing...</div>
+  </div>
+</div>
 
   <!-- MODALS CONTAINER -->
   <div id="customAlert" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 p-4">
@@ -71,6 +86,7 @@
   
   <script src="js/login.js"></script>
   <script src="js/transitions.js" defer></script> 
+  <script src="js/loader.js"></script>
 
 </body>
 </html>
