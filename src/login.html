@@ -6,23 +6,8 @@
   <title>Fibear Client Portal</title>
   <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
   <link rel="stylesheet" href="css/output.css">
-  <link rel="stylesheet" href="css/loader.css">
-
 </head>
 <body class="bg-gradient-to-b from-[#121418] to-[#014C6A] flex items-center justify-center min-h-screen relative">
-  
-  <div id="loading-screen">
-  <div class="loader-container">
-      <div class="particles-container"></div>
-    <img src="./assets/icons/logo.png" alt="Loading..." class="loader-logo"/>
-    
-    <div class="ring" id="ring-1"></div>
-    <div class="ring" id="ring-2"></div>
-    <div class="ring" id="ring-3"></div>
-
-    <div class="loading-text">Initializing...</div>
-  </div>
-</div>
 
   <!-- MODALS CONTAINER -->
   <div id="customAlert" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 p-4">
@@ -72,7 +57,8 @@
           <p class="text-sm text-gray-400 mt-3">Scan the code with your phone</p>
         </div>
         <div class="w-full max-w-xs mx-auto space-y-4">
-          <a href="assets/download/FNTC.apk" download class="flex items-center justify-center gap-3 w-full py-3 px-4 rounded-lg bg-black text-white font-semibold hover:bg-gray-800 transition">
+          
+          <a href="assets/apk/FNTCMobile.apk" class="flex items-center justify-center gap-3 w-full py-3 px-4 rounded-lg bg-black text-white font-semibold hover:bg-gray-800 transition" download target="_blank" rel="noopener noreferrer">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
             <span>Download APK</span>
           </a>
@@ -86,7 +72,6 @@
   
   <script src="js/login.js"></script>
   <script src="js/transitions.js" defer></script> 
-  <script src="js/loader.js"></script>
 
 </body>
 </html>
