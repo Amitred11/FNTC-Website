@@ -289,7 +289,7 @@ function setupVideoModal() {
     const seek = (e) => { const r = progressBarContainer.getBoundingClientRect(); videoPlayer.currentTime = ((e.clientX - r.left) / r.width) * videoPlayer.duration; };
     const toggleFullscreen = () => { if (!document.fullscreenElement) { videoContainer.requestFullscreen().catch(err => console.error(err)); } else { document.exitFullscreen(); } };
 
-    const openModal = () => { videoModal.classList.add('active'); videoPlayer.play(); };
+    const openModal = () => { videoModal.classList.add('active'); videoPlayer.muted = false;  videoPlayer.play();  };
     const closeModal = () => { videoPlayer.pause(); videoModal.classList.remove('active'); setTimeout(() => { videoPlayer.currentTime = 0; }, 300); };
     
     const openInfoModal = () => { videoInfoModal.classList.add('active'); };
