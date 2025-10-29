@@ -1,9 +1,5 @@
 // js/transitions.js
 
-/**
- * Handles the fade-out effect and navigates to a new page.
- * @param {string} url - The URL of the page to transition to.
- */
 function transitionToPage(url) {
   document.body.classList.add('fade-out');
   setTimeout(() => {
@@ -26,38 +22,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const serviceModalImage = document.getElementById('serviceModalImage');
     const serviceModalTitle = document.getElementById('serviceModalTitle');
     const serviceModalDescription = document.getElementById('serviceModalDescription');
-    const serviceModalLink = document.getElementById('serviceModalLink'); // The link for attribution
-    const imageSourceName = document.getElementById('imageSourceName'); // The new span for the source name
+    const serviceModalLink = document.getElementById('serviceModalLink'); 
+    const imageSourceName = document.getElementById('imageSourceName');
 
-    // Ensure all required elements are on the page
     if (serviceLinks.length > 0 && serviceModal && imageSourceName) {
         
         serviceLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default link behavior
+                e.preventDefault(); 
 
-                // --- 1. Get data from the clicked card ---
                 const title = link.dataset.title;
                 const description = link.dataset.description;
                 const imgSrc = link.querySelector('img').src;
                 const sourceUrl = link.dataset.source;
-                const sourceName = link.dataset.sourceName; // Get the new source name data
+                const sourceName = link.dataset.sourceName; 
 
-                // --- 2. Populate the modal with the data ---
                 serviceModalTitle.textContent = title;
                 serviceModalDescription.textContent = description;
                 serviceModalImage.src = imgSrc;
 
-                // Update the attribution link and its text
                 if (sourceUrl && sourceName) {
                     serviceModalLink.href = sourceUrl;
-                    imageSourceName.textContent = sourceName; // Set the text of the span
-                    serviceModalLink.style.display = 'inline'; // Show the link
+                    imageSourceName.textContent = sourceName;
+                    serviceModalLink.style.display = 'inline'; 
                 } else {
-                    serviceModalLink.style.display = 'none'; // Hide if no source is provided
+                    serviceModalLink.style.display = 'none'; 
                 }
 
-                // --- 3. Show the modal with a transition ---
                 serviceModal.classList.remove('hidden');
                 setTimeout(() => {
                     serviceModalBox.classList.remove('scale-90', 'opacity-0');

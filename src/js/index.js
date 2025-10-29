@@ -38,7 +38,7 @@ window.addEventListener("scroll", function() {
 
 
 // ==================================================================
-// 4. "About Us" Modal Logic (Refactored)
+// 4. "About Us" Modal Logic
 // ==================================================================
 
 function createModalSection(icon, title, subtitle, points) {
@@ -186,7 +186,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 
 // ==================================================================
-// 7. Contact Form Logic (MODIFIED)
+// 7. Contact Form Logic 
 // ==================================================================
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById('form-status');
@@ -246,7 +246,7 @@ contactForm.addEventListener("submit", async (e) => {
 });
 
 // ==================================================================
-// 8. Video Modal Logic (FINAL REFACTOR v4 - With Info Modal)
+// 8. Video Modal Logic 
 // ==================================================================
 function setupVideoModal() {
     // --- Element Selection ---

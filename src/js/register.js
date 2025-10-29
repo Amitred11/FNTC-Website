@@ -225,7 +225,7 @@ function initializeApp() {
 
 
 // ==================================================================
-// 4. Entry Point
+// 3. Entry Point
 // ==================================================================
 document.addEventListener('DOMContentLoaded', () => {
     fetch('modals.html')
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==================================================================
-// 9. Developer Console Warning
+// 4. Developer Console Warning
 // ==================================================================
 const stopStyle = ['font-size: 50px', 'font-weight: bold', 'color: red', 'padding: 10px 0'].join(';');
 const messageStyle = ['font-size: 18px', 'line-height: 1.5'].join(';');
