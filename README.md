@@ -27,7 +27,7 @@ This repository hosts the public-facing website for **Fibear Network Technologie
 🔑 **Register & Login:** Access or register to your account. Login also supports **QR code download** for quick access.
 🎥 **Promotional Video:** Highlights the network’s performance.
 ✉️ **Contact Form:** Allows customers to send messages and inquiries.
-👣 **Footer:** Contact details and developer credits — *Created by [https://github.com/dy2zz](dy2zz) and [https://github.com/Amitred11](Amitred11)*.
+👣 **Footer:** Contact details and developer credits — *Created by [dy2zz](https://github.com/dy2zz) and [Amitred11](https://github.com/Amitred11)*.
 
 ---
 
