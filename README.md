@@ -12,31 +12,30 @@ This repository contains the full-stack source code for the **Fibear Internet Se
 
 ## Project Overview
 
-This repository hosts the public-facing website for **Fibear Network Technologies Corporation (FNTC)** — a small ISP offering fiber optic installation, internet packages, technical support, and customer service. The site is currently deployed on Vercel and serves as the company landing page, showcasing plans, contact details, and a promotional video.
+This repository hosts the public-facing website for **Fibear Network Technologies Corporation (FNTC)** — a small ISP offering fiber optic installation, internet packages, technical support, and customer service. The site is deployed on Vercel and serves as the company’s official landing page, presenting available plans, company details, and customer contact options.
+
+> 🧱 **Built With:** Pure **HTML**, **Tailwind CSS**, and **JavaScript**.
+
 
 ---
 
 ## Key Features
 
-* Home / Hero section with tagline: *"Experience Lighting-Fast Internet — You Can Trust Every Day"*
-* About Us section with company description and mission
-* Services and Internet Packages overview
-* Client Login (Download QR)
-* Register
-* Promotional video section
-* Contact form with phone numbers and email
-* Footer with contact info and credits (Created by dy2zz and Amitred11)
+🌐 **Home Page:** Engaging hero section with tagline *“Experience Lighting-Fast Internet — You Can Trust Every Day.”*
+📜 **About Us:** Describes the mission and company background.
+⚙️ **Services:** Displays fiber installation and internet plan offerings.
+🔑 **Register & Login:** Access or register to your account. Login also supports **QR code download** for quick access.
+🎥 **Promotional Video:** Highlights the network’s performance.
+✉️ **Contact Form:** Allows customers to send messages and inquiries.
+👣 **Footer:** Contact details and developer credits — *Created by [https://github.com/dy2zz](dy2zz) and [https://github.com/Amitred11](Amitred11)*.
 
 ---
 
-## Suggested / Recommended Tech Stack
+## Tech Stack
 
-> **Note:** The site is deployed on Vercel. If you want the README to claim the exact stack (Next.js, React, Tailwind CSS, etc.), tell me and I will inspect the repo or you can provide the codebase. Below are recommended/typical choices for a project like this:
-
-* Frontend: React or Next.js
-* Styling: Tailwind CSS or plain CSS/SCSS
-* Media: HTML5 video or a hosted video player
-* Hosting / Deployment: Vercel
+🧩 **Frontend:** HTML + Tailwind CSS + JavaScript
+🎨 **Styling:** Tailwind CSS utilities for responsive design
+🚀 **Deployment:** Vercel (auto-deployment from GitHub)
 
 ---
 
