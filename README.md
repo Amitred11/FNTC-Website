@@ -50,7 +50,7 @@ This repository hosts the public-facing website for **Fibear Network Technologie
 
 ## 🎓 Author
 
-This project was created by **Amitred11** and **dy2zz** in collaboration with **Fibear Network Technologies Corp.** as the culmination of their studies, showcasing the practical application of software engineering principles.
+This project was created by **[dy2zz](https://github.com/dy2zz)** and **[Amitred11](https://github.com/Amitred11)** in collaboration with **Fibear Network Technologies Corp.** as the culmination of their studies, showcasing the practical application of software engineering principles.
 And Jovy Ann Molo for figma...
 
 ---
